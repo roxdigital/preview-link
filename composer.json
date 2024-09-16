@@ -7,6 +7,10 @@
       "email": "bob@rox.nl"
     }
   ],
+  "require": {
+    "php": "^8.2",
+    "statamic/cms": "^4.0"
+  },
   "autoload": {
     "psr-4": {
       "Roxdigital\\PreviewLink\\": "src"
