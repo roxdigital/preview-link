@@ -1,16 +1,18 @@
 {
   "name": "roxdigital/preview-link",
   "description": "A Statamic addon for generating preview links",
+  "version": "1.0.0",
+  "type": "statamic-addon",
+  "require": {
+    "php": "^8.2",
+    "statamic/cms": "^4.0"
+  },
   "authors": [
     {
       "name": "Bob Vrijland",
       "email": "bob@rox.nl"
     }
   ],
-  "require": {
-    "php": "^8.2",
-    "statamic/cms": "^4.0"
-  },
   "autoload": {
     "psr-4": {
       "Roxdigital\\PreviewLink\\": "src"
