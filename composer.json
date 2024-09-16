@@ -1,0 +1,26 @@
+{
+  "name": "roxdigital/preview-link",
+  "description": "A Statamic addon for generating preview links",
+  "authors": [
+    {
+      "name": "Bob Vrijland",
+      "email": "bob@rox.nl"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Roxdigital\\PreviewLink\\": "src"
+    }
+  },
+  "extra": {
+    "statamic": {
+      "name": "Preview Link",
+      "description": "Enables the viewing of unpublished/scheduled entries"
+    },
+    "laravel": {
+      "providers": [
+        "Roxdigital\\PreviewLink\\ServiceProvider"
+      ]
+    }
+  }
+}
