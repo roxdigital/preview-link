@@ -4,8 +4,8 @@ namespace Roxdigital\PreviewLink\Fieldtypes;
 
 use Statamic\Fields\Fieldtype;
 use Statamic\Entries\Entry;
-use Illuminate\Support\Str;
 use Roxdigital\PreviewLink\Services\PreviewUrl;
+use Statamic\Entries\Collection;
 
 class PreviewLink extends Fieldtype
 {
