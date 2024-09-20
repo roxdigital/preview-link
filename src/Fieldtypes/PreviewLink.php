@@ -40,29 +40,22 @@ class PreviewLink extends Fieldtype
     }
 
     /**
-     * Retrieve the current entry data from the request path.
+     * Retrieve the current entry data from the fields parent.
      *
      * @return \Statamic\Entries\Entry|null
      */
     private function getEntryData()
     {
-        $path = request()->path();
-        $segments = explode('/', $path);
-
-        // Check if we are in a entry of a collection, and if so, check if we have a valid Uuid
-        if (count($segments) >= 5 && $segments[1] === 'collections' && $segments[3] === 'entries') {
-            if ($segments[4] !== 'create') {
-                $potentialId = $segments[4];
-                if (Str::isUuid($potentialId)) {
-                    $entry = Entry::find($potentialId);
-                    if ($entry) {
-                        return $entry;
-                    }
-                }
-            }
+        if (! $entry = $this->field->parent()) {
+            return null;
         }
-        // Return null if this is not an entry
-        return null;
+
+        // Check if we are creating a new entry
+        if ($entry instanceof Collection) {
+            return null;
+        }
+
+        return $entry;
     }
 
 }
