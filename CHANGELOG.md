@@ -7,6 +7,7 @@
 - [Bump vite to 4.4.5](https://github.com/roxdigital/preview-link/commit/10c70caa9854ffe419f98434a7edc20c1f979df8) 
 - [Bump rollup to 3.29.5](https://github.com/roxdigital/preview-link/commit/2135d6b25882e89a9d74b41d64351cd5aeac7f20)
 - [Bump nanoid to 3.3.8](https://github.com/roxdigital/preview-link/pull/5)
+- [Other dependabot updates](https://github.com/roxdigital/preview-link/pull/7)
 
 
 ## [2.0.0] - 20-09-2024
