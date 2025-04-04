@@ -63,10 +63,6 @@ export default {
       return this.isWorkingCopy || !this.publishForm.published || this.isFuture;
     },
   },
-  mounted() {
-    const translation = this.translate("preview-link.messages.copied");
-    console.log("Translation:", translation);
-  },
   methods: {
     copyToClipboard() {
       navigator.clipboard.writeText(this.meta.site_url);

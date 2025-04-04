@@ -25,6 +25,7 @@ class ServiceProvider extends AddonServiceProvider
         ], 'preview-link-config');
 
         $this->mergeConfigFrom(__DIR__.'/../config/preview_link.php', 'statamic.preview_link');
-    }
 
+        $this->loadTranslationsFrom(__DIR__.'/../resources/lang', 'preview-link');
+    }
 }
