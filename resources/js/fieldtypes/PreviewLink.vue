@@ -5,7 +5,7 @@
       class="btn w-full"
       @click="copyToClipboard"
       :disabled="!show"
-      v-text="__('preview-link::buttons.copy')"
+      v-text="translate('preview-link::strings.copy')"
     ></button>
   </div>
 </template>
@@ -63,11 +63,14 @@ export default {
       return this.isWorkingCopy || !this.publishForm.published || this.isFuture;
     },
   },
-
+  mounted() {
+    const translation = this.translate("preview-link.messages.copied");
+    console.log("Translation:", translation);
+  },
   methods: {
     copyToClipboard() {
       navigator.clipboard.writeText(this.meta.site_url);
-      this.$toast.success(__("preview-link::messages.copied"));
+      this.$toast.success(this.translate("preview-link::strings.copied"));
     },
   },
 };
