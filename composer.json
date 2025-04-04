@@ -1,7 +1,7 @@
 {
   "name": "roxdigital/preview-link",
   "description": "A Statamic addon for generating preview links",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "type": "statamic-addon",
   "require": {
     "php": "^8.2",
