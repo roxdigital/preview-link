@@ -38,3 +38,8 @@ A Statamic addon for generating preview links for your entries. This addon allow
 To generate a preview URL for an entry, add the custom fieldtype 'Preview link' to your blueprint. Browse to the entry in your /cp and click the button. The generated URL that it will copy will include a token that allows access to the preview through tokens stored in `/storage/statamic/tokens`.
 
 > Version 2.0.0 is used for Statamic 5, where version 1.0.0 can still be used for Statamic 4
+
+## Credits
+
+This repo is based on the work of [Tin Modric](https://github.com/modrictin)
+found [here](https://statamic.com/addons/modric-tin/statamic-preview-links)
