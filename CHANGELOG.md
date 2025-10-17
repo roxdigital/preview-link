@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.0.3] - 17-10-2025
+
+### Changed
+
+- Updated dependencies and added license & credits.
+
 ## [2.0.2] - 04-04-2025
 
 ### Changed
