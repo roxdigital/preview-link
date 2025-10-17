@@ -1,4 +1,8 @@
 {
+  "name": "roxdigital/preview-link",
+  "description": "A Statamic addon for generating preview links",
+  "version": "2.0.3",
+  "type": "statamic-addon",
   "dependencies": {
     "vue": "^2.6.11"
   },
