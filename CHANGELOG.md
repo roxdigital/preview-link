@@ -1,5 +1,16 @@
 # Changelog
 
+## [3.0.0] - 27-02-2026
+
+### Changed
+
+- **Statamic 6 / Vue 3 compatibility.**
+- Vue component migrated to Vue 3: imports `FieldtypeMixin` and `Button` from `@statamic/cms`, replaces `moment.js` with native `Date`, replaces `$parent` traversal with `publishContainer`.
+- Publish-state logic moved to PHP `preload()` — button is only shown when the entry needs a preview (draft, working copy, or future-dated).
+- `publishContainer.values.published` used for live reactive disable state.
+- Vite config updated: uses `@vitejs/plugin-vue` + a virtual-module plugin to map `vue` → `window.Vue`, resolves `@statamic/cms` from the host project via `vendor/` symlink.
+- Minimum PHP `^8.3`, minimum Statamic `^6.0`.
+
 ## [2.0.3] - 17-10-2025
 
 ### Changed
