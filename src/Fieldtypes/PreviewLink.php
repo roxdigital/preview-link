@@ -26,6 +26,10 @@ class PreviewLink extends Fieldtype
     /**
      * Preload entry data and generate a preview URL.
      *
+     * Only returns a URL when the entry actually needs a preview link,
+     * i.e. when it is not yet publicly visible. The Vue component simply
+     * enables the button when site_url is present and disables it when empty.
+     *
      * @return array
      */
     public function preload()
@@ -36,11 +40,40 @@ class PreviewLink extends Fieldtype
             return [];
         }
 
+        // Entry is already publicly accessible — no preview link needed.
+        if ($this->isLiveEntry($entry)) {
+            return [];
+        }
+
         return ['site_url' => PreviewUrl::generate($entry)];
     }
 
     /**
-     * Retrieve the current entry data from the fields parent.
+     * Determine whether the entry is already publicly visible.
+     * Mirrors the same logic in TokenProcessor so behaviour is consistent.
+     *
+     * @param  Entry  $entry
+     * @return bool
+     */
+    private function isLiveEntry(Entry $entry): bool
+    {
+        if (! $entry->published()) {
+            return false;
+        }
+
+        if ($entry->hasWorkingCopy()) {
+            return false;
+        }
+
+        if ($entry->collection()->dated() && $entry->date()->isFuture()) {
+            return false;
+        }
+
+        return true;
+    }
+
+    /**
+     * Retrieve the current entry data from the field's parent.
      *
      * @return \Statamic\Entries\Entry|null
      */
@@ -50,12 +83,11 @@ class PreviewLink extends Fieldtype
             return null;
         }
 
-        // Check if we are creating a new entry
+        // Bail when creating a brand-new entry (no ID yet).
         if ($entry instanceof Collection) {
             return null;
         }
 
         return $entry;
     }
-
 }

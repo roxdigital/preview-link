@@ -1,72 +1,51 @@
 <template>
-  <div>
-    <button
-      type="button"
-      class="btn w-full"
-      @click="copyToClipboard"
-      :disabled="!show"
-      v-text="translate('preview-link::strings.copy')"
-    ></button>
-  </div>
+  <Button
+    :text="__('preview-link::strings.copy')"
+    class="w-full"
+    :disabled="!show"
+    @click="copyToClipboard"
+  />
 </template>
 
 <script>
+import { FieldtypeMixin as Fieldtype } from "@statamic/cms";
+import { Button } from "@statamic/cms/ui";
+
 export default {
+  components: { Button },
+
   mixins: [Fieldtype],
 
   computed: {
     entryDate() {
-      let dateTime = this.publishForm.values.date;
-
-      if (!dateTime) {
-        return null;
-      }
-
-      return moment(dateTime.date + "T" + dateTime.time, "YYYY-MM-DDTHH:mm");
+      const d = this.publishContainer?.values?.date;
+      if (!d?.date) return null;
+      return new Date(`${d.date}T${d.time ?? "00:00"}`);
     },
 
     isFuture() {
-      return this.entryDate?.isAfter(moment());
-    },
-
-    isWorkingCopy() {
-      return (
-        this.publishForm.revisionsEnabled && this.publishForm.isWorkingCopy
-      );
-    },
-
-    publishForm() {
-      let vm = this;
-      while (true) {
-        let parent = vm.$parent;
-
-        if (!parent) {
-          return false;
-        }
-
-        if (parent.$options._componentTag == "entry-publish-form") {
-          return parent;
-        }
-        vm = parent;
-      }
+      return this.entryDate instanceof Date && this.entryDate > new Date();
     },
 
     show() {
-      if (!this.publishForm) {
-        return false;
-      }
+      // PHP preload() only sets site_url when the entry isn't already live,
+      // so this is the primary gate for the initial page load.
+      if (!this.meta?.site_url) return false;
 
-      if (this.publishForm.isDirty) {
-        return false;
-      }
+      // Reactive check using publishContainer.values (a reactive Proxy):
+      // if the entry was published during this CP session, hide the button.
+      // Even if published, keep it visible for future-dated entries.
+      const published = this.publishContainer?.values?.published;
+      if (published === true && !this.isFuture) return false;
 
-      return this.isWorkingCopy || !this.publishForm.published || this.isFuture;
+      return true;
     },
   },
+
   methods: {
     copyToClipboard() {
       navigator.clipboard.writeText(this.meta.site_url);
-      this.$toast.success(this.translate("preview-link::strings.copied"));
+      this.$toast.success(__("preview-link::strings.copied"));
     },
   },
 };
